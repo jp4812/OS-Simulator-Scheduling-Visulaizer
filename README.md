@@ -77,7 +77,7 @@ Processes are executed in time slices (quantum = 2).
 ---
 
 ## 👨‍💻 Author
-Developed by **Jemil** as part of an **Operating Systems course project**.  
+Developed by **Jemil and Veer** as part of an **Operating Systems course project**.  
 
 ---
 
