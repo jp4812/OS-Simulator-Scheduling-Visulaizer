@@ -6,135 +6,469 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>1000</height>
+    <width>1200</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>OS-Sim: Schedulyze</string>
   </property>
+  <property name="styleSheet">
+   <string>
+QMainWindow {
+    background-color: #0f1419;
+    color: #e2e8f0;
+}
+
+QLabel {
+    color: #e2e8f0;
+}
+
+QComboBox {
+    background-color: #1a1f2e;
+    color: #e2e8f0;
+    border: 2px solid #2d3748;
+    border-radius: 6px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QComboBox:hover {
+    border: 2px solid #64b5f6;
+}
+
+QComboBox::drop-down {
+    border: none;
+    background-color: #2d3748;
+}
+
+QSpinBox {
+    background-color: #1a1f2e;
+    color: #e2e8f0;
+    border: 2px solid #2d3748;
+    border-radius: 6px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+QSpinBox:focus {
+    border: 2px solid #64b5f6;
+}
+
+QPushButton {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QPushButton:hover {
+    background-color: #1d4ed8;
+    border: 2px solid #60a5fa;
+}
+
+QPushButton:pressed {
+    background-color: #1e40af;
+}
+
+QPushButton#btn_clear {
+    background-color: #dc2626;
+}
+
+QPushButton#btn_clear:hover {
+    background-color: #b91c1c;
+}
+
+QPushButton#btn_simulate {
+    background-color: #059669;
+    min-width: 120px;
+}
+
+QPushButton#btn_simulate:hover {
+    background-color: #047857;
+}
+
+QTableWidget {
+    background-color: #1a1f2e;
+    gridline-color: #2d3748;
+    border: 2px solid #2d3748;
+    border-radius: 6px;
+}
+
+QTableWidget::item {
+    padding: 8px;
+    color: #e2e8f0;
+    border: none;
+}
+
+QTableWidget::item:selected {
+    background-color: #2563eb;
+    color: white;
+}
+
+QHeaderView::section {
+    background-color: #1a1f2e;
+    color: #64b5f6;
+    padding: 10px;
+    border: none;
+    border-right: 1px solid #2d3748;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QFrame {
+    border: 2px solid #2d3748;
+    border-radius: 8px;
+}
+
+QPlainTextEdit {
+    background-color: transparent;
+    color: #64b5f6;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+QGroupBox {
+    color: #64b5f6;
+    border: 2px solid #2d3748;
+    border-radius: 6px;
+    margin-top: 10px;
+    padding-top: 15px;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+   </string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="combo_algorithm">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>80</y>
-      <width>150</width>
-      <height>30</height>
-     </rect>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>15</number>
     </property>
+    <property name="leftMargin">
+     <number>20</number>
+    </property>
+    <property name="topMargin">
+     <number>20</number>
+    </property>
+    <property name="rightMargin">
+     <number>20</number>
+    </property>
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
+    
+    <!-- Header -->
     <item>
-     <property name="text">
-      <string>FCFS</string>
-     </property>
+     <widget class="QPlainTextEdit" name="plainTextEdit">
+      <property name="maximumHeight">
+       <number>50</number>
+      </property>
+      <property name="plainText">
+       <string>🖥️  OS-Sim: Schedulyze - CPU Scheduling Simulator</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
+    
+    <!-- Algorithm Selection Section -->
     <item>
-     <property name="text">
-      <string>SJF</string>
-     </property>
+     <widget class="QGroupBox" name="groupBox_algo">
+      <property name="title">
+       <string>⚙️  Algorithm Selection</string>
+      </property>
+      <layout class="QHBoxLayout" name="algoLayout">
+       <item>
+        <widget class="QLabel" name="label_algo">
+         <property name="text">
+          <string>Select Algorithm:</string>
+         </property>
+         <property name="styleSheet">
+          <string>color: #cbd5e1;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_algorithm">
+         <item>
+          <property name="text">
+           <string>FCFS (First Come First Serve)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>SJF (Shortest Job First)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Round Robin (Quantum=2)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Non-Preemptive Priority</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Preemptive Priority</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_algo">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </item>
+    
+    <!-- Input Section -->
     <item>
-     <property name="text">
-      <string>Round Robin</string>
-     </property>
+     <widget class="QGroupBox" name="groupBox_input">
+      <property name="title">
+       <string>➕  Add Process</string>
+      </property>
+      <layout class="QHBoxLayout" name="inputLayout">
+       <item>
+        <widget class="QLabel" name="label_arrival">
+         <property name="text">
+          <string>Arrival Time:</string>
+         </property>
+         <property name="styleSheet">
+          <string>color: #cbd5e1;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinBox_arrival">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_burst">
+         <property name="text">
+          <string>Burst Time:</string>
+         </property>
+         <property name="styleSheet">
+          <string>color: #cbd5e1;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spin_burst">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>50</number>
+         </property>
+         <property name="value">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_priority">
+         <property name="text">
+          <string>Priority:</string>
+         </property>
+         <property name="styleSheet">
+          <string>color: #cbd5e1;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spin_priority">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_input">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_add">
+         <property name="text">
+          <string>Add Process</string>
+         </property>
+         <property name="minimumWidth">
+          <number>120</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-   </widget>
-   <widget class="QSpinBox" name="spinBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>140</y>
-      <width>101</width>
-      <height>30</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spin_burst">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>140</y>
-      <width>101</width>
-      <height>30</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_add">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>140</y>
-      <width>100</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Add Process</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_simulate">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>140</y>
-      <width>100</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Simulate</string>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="table_processes">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>750</width>
-      <height>250</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QFrame" name="gantt_container">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>440</y>
-      <width>750</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: #ffffff; border: 2px solid #333;</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>30</y>
-      <width>271</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="plainText">
-     <string>	Select the Process to Simulate
-</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_clear">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>590</y>
-      <width>56</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Reset</string>
-    </property>
-   </widget>
+    
+    <!-- Table Section -->
+    <item>
+     <widget class="QGroupBox" name="groupBox_table">
+      <property name="title">
+       <string>📋  Process Queue</string>
+      </property>
+      <layout class="QVBoxLayout" name="tableLayout">
+       <item>
+        <widget class="QTableWidget" name="table_processes">
+         <property name="minimumHeight">
+          <number>150</number>
+         </property>
+         <property name="maximumHeight">
+          <number>200</number>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    
+    <!-- Simulation Controls -->
+    <item>
+     <layout class="QHBoxLayout" name="controlLayout">
+      <item>
+       <spacer name="horizontalSpacer_control">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_simulate">
+        <property name="text">
+         <string>▶️  Simulate</string>
+        </property>
+        <property name="minimumWidth">
+         <number>150</number>
+        </property>
+        <property name="minimumHeight">
+         <number>40</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_clear">
+        <property name="text">
+         <string>🔄  Reset</string>
+        </property>
+        <property name="minimumWidth">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    
+    <!-- Gantt Chart Section -->
+    <item>
+     <widget class="QGroupBox" name="groupBox_gantt">
+      <property name="title">
+       <string>📊  Gantt Chart</string>
+      </property>
+      <layout class="QVBoxLayout" name="ganttLayout">
+       <item>
+        <widget class="QFrame" name="gantt_container">
+         <property name="minimumHeight">
+          <number>120</number>
+         </property>
+         <property name="styleSheet">
+          <string>
+QFrame {
+    background-color: #0f1419;
+    border: 2px solid #2d3748;
+    border-radius: 6px;
+}
+          </string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    
+    <!-- Statistics Section -->
+    <item>
+     <widget class="QGroupBox" name="groupBox_stats">
+      <property name="title">
+       <string>📈  Performance Metrics</string>
+      </property>
+      <layout class="QVBoxLayout" name="statsLayout">
+       <item>
+        <widget class="QLabel" name="label_stats">
+         <property name="text">
+          <string>Run a simulation to see metrics...</string>
+         </property>
+         <property name="styleSheet">
+          <string>
+color: #60a5fa;
+font-weight: bold;
+font-size: 12px;
+padding: 10px;
+         </string>
+         </property>
+         <property name="alignment">
+          <enum>Qt::AlignCenter</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    
+   </layout>
   </widget>
  </widget>
  <resources/>
