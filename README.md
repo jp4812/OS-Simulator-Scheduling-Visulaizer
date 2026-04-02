@@ -3,7 +3,7 @@ An interactive CPU Scheduling Visualizer built with Python (PyQt6). Schedulyze a
 Here’s a solid **README.md** draft for your repo that explains your project clearly and makes it easy for others (and evaluators) to understand and run it:
 
 ---
-## 🚀 Features
+## Features
 - Add processes with **Arrival Time** and **Burst Time**.
 - Supports multiple scheduling algorithms:
   - **FCFS (First Come First Serve)**
@@ -15,7 +15,7 @@ Here’s a solid **README.md** draft for your repo that explains your project cl
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```
 ├── main_window.ui        # Qt Designer UI file
 ├── schedulyze.py         # Main application logic
@@ -24,7 +24,7 @@ Here’s a solid **README.md** draft for your repo that explains your project cl
 
 ---
 
-## 🛠️ Requirements
+## Requirements
 - Python 3.9+
 - PyQt6
 
@@ -35,7 +35,7 @@ pip install PyQt6
 
 ---
 
-## ▶️ Usage
+## Usage
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/schedulyze.git
@@ -53,13 +53,13 @@ pip install PyQt6
 
 ---
 
-## 📸 Demo
+## Demo
 - **Process Table**: Displays all added processes.
 - **Gantt Chart**: Shows execution order and timing visually.
 
 ---
 
-## ⚙️ Algorithms Implemented
+## Algorithms Implemented
 ### FCFS
 Processes are executed in the order they arrive.  
 ### SJF
@@ -69,14 +69,14 @@ Processes are executed in time slices (quantum = 2).
 
 ---
 
-## 🧩 Future Improvements
+## Future Improvements
 - Add **Priority Scheduling**.
 - Allow user-defined **quantum** for Round Robin.
 - Export results (waiting time, turnaround time) to CSV.
 
 ---
 
-## 👨‍💻 Author
+## Author
 Developed by **Jemil and Veer** as part of an **Operating Systems course project**.  
 
 ---

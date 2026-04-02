@@ -125,14 +125,14 @@ class SchedulyzeApp(QtWidgets.QMainWindow):
             avg_wait, avg_turnaround = self.calculate_metrics(results)
             
             # Update statistics label
-            stats_text = f"⏱️ Avg Waiting Time: {avg_wait:.2f}  |  ⏳ Avg Turnaround: {avg_turnaround:.2f}  |  🔄 Context Switches: {len(switches)}"
+            stats_text = f"Avg Waiting Time: {avg_wait:.2f}  |  Avg Turnaround: {avg_turnaround:.2f}  |  Context Switches: {len(switches)}"
             self.label_stats.setText(stats_text)
             
             if switches:
                 lines = [f"  t={s['time']:>3}: {s['from']} → {s['to']}" for s in switches]
-                msg = f"⚡ {len(switches)} Context Switch(es) Detected:\n\n" + "\n".join(lines)
+                msg = f"{len(switches)} Context Switch(es) Detected:\n\n" + "\n".join(lines)
             else:
-                msg = "✅ No context switches occurred."
+                msg = "No context switches occurred."
 
             QtWidgets.QMessageBox.information(self, "Simulation Results", msg)
 
@@ -177,7 +177,6 @@ class SchedulyzeApp(QtWidgets.QMainWindow):
             """)
             block.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             layout.addWidget(block)
-        
         layout.addStretch()
         self.gantt_container.update()
 
@@ -240,7 +239,7 @@ class SchedulyzeApp(QtWidgets.QMainWindow):
             rem_burst[p['id']] -= take
             current_time += take
             results.append({"id": p['id'], "start": start, "finish": current_time, "burst": take})
-            
+            #to check if any new process has arrived during the execution of current process
             while temp_queue and temp_queue[0]['arrival'] <= current_time:
                 ready_q.append(temp_queue.pop(0))
             
@@ -268,14 +267,13 @@ class SchedulyzeApp(QtWidgets.QMainWindow):
             # Sort by priority (lower number = higher priority)
             ready.sort(key=lambda x: x['priority'])
             p = ready.pop(0)
-            
+        
             start = current_time
             finish = start + p['burst']
             results.append({"id": p['id'], "start": start, "finish": finish, "burst": p['burst']})
             current_time = finish
-        
         return results
-
+    
     def logic_preemptive_priority(self):
         """Preemptive Priority Scheduling (Lower number = Higher priority)"""
         pending = sorted(self.processes, key=lambda x: x['arrival'])
@@ -297,7 +295,7 @@ class SchedulyzeApp(QtWidgets.QMainWindow):
                 continue
             
             # Select process with highest priority (lowest priority number)
-            current_process = min(available, key=lambda x: x['priority'])
+            current_process = min(available, key=lambda x: (x['priority'], x['arrival']))
             
             # Execute for 1 unit of time
             burst_time = 1
